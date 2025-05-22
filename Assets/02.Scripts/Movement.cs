@@ -14,26 +14,12 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this.transform.position = this.transform.position + Vector3.forward * movespeed;
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += Vector3.forward * movespeed1 * Time.deltaTime;
-        }
+        Vector3 dir = new Vector3(h, 0, v);
+        Debug.Log($"현재 입력 : {dir}");
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.back * movespeed1 * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += Vector3.left * movespeed1 * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right  * movespeed1 * Time.deltaTime;
-        }
+        transform.position += dir * movespeed1 * Time.deltaTime;
     }
 }
