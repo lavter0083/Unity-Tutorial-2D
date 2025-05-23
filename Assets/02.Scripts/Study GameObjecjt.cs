@@ -8,7 +8,7 @@ public class StudyGameObjecjt : MonoBehaviour
     public Quaternion rot;
 
 
-    void Start()
+    void Awake()
     {
         CreateAmogus();
 
