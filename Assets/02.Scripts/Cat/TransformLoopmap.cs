@@ -3,10 +3,8 @@ using UnityEngine;
 public class TransformLoopmap : MonoBehaviour
 {
     public float moveSpeed = 5f;
-
-    public Vector3 returnPos = new Vector3 (0f, 1.5f, 0f);
-
-    public float movePos;
+    public float retrunPosX = 15f;
+    public float randomPosY;
 
     // Update is called once per frame
     void Update()
@@ -15,9 +13,10 @@ public class TransformLoopmap : MonoBehaviour
         Debug.Log(Time.fixedDeltaTime);
             
         // 배경 왼쪽으로 이동하는 기능
-        if (transform.position.x <= -movePos)
+        if (transform.position.x <= -retrunPosX)
         {
-            transform.position = returnPos;
+            randomPosY = Random.Range(-9f, -5f);
+            transform.position = new Vector3(retrunPosX, randomPosY, 0);
         }
     }
 }
