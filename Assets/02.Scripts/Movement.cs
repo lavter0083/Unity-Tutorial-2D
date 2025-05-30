@@ -5,11 +5,7 @@ public class Movement : MonoBehaviour
     private float movespeed;
     public float movespeed1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public static int coinCount = 0;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +20,6 @@ public class Movement : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v);
         Vector3 normalDir = dir.normalized;
-        Debug.Log($"현재 입력 : {normalDir}");
 
         transform.position += normalDir * movespeed1 * Time.deltaTime;
 
