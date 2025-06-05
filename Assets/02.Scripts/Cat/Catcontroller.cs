@@ -8,7 +8,8 @@ public class Catcontroller : MonoBehaviour
     private Rigidbody2D CatRb;
     private Animator CatAnim;
 
-    public float jumpPower;
+    public float jumpPower = 10f;
+    public float limitPower = 9f;
     public bool isGround = false;
     public int jumpCount = 0;
 
@@ -28,6 +29,9 @@ public class Catcontroller : MonoBehaviour
             CatRb.AddForceY(jumpPower, ForceMode2D.Impulse);
             jumpCount++; //1씩 증가
             SoundManager.OnJumpSound();
+
+            if (CatRb.linearVelocityY > limitPower) // 자연스러운 점프를 위한 속도 제한
+                CatRb.linearVelocityY = limitPower;
         }
     }
     private void OnCollisionEnter2D(Collision2D other)
