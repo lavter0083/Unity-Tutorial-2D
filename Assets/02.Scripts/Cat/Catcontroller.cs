@@ -8,8 +8,8 @@ public class Catcontroller : MonoBehaviour
     private Rigidbody2D CatRb;
     private Animator CatAnim;
 
-    public float jumpPower = 10f;
-    public float limitPower = 9f;
+    public float jumpPower = 30f;
+    public float limitPower = 25f;
     public bool isGround = false;
     public int jumpCount = 0;
 
@@ -33,6 +33,10 @@ public class Catcontroller : MonoBehaviour
             if (CatRb.linearVelocityY > limitPower) // 자연스러운 점프를 위한 속도 제한
                 CatRb.linearVelocityY = limitPower;
         }
+
+        var catRotation = transform.eulerAngles;
+        catRotation.z = CatRb.linearVelocityY * 2.5f;
+        transform.eulerAngles = catRotation;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {

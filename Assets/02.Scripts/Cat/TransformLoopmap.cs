@@ -6,7 +6,13 @@ public class TransformLoopmap : MonoBehaviour
     public float retrunPosX = 15f;
     public float randomPosY;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        randomPosY = Random.Range(-8f, -3f);
+
+        transform.position = new Vector3(transform.position.x, randomPosY, 0);
+    }
+
     void Update()
     {
         transform.position += Vector3.left * moveSpeed * Time.fixedDeltaTime;
@@ -15,7 +21,7 @@ public class TransformLoopmap : MonoBehaviour
         // 배경 왼쪽으로 이동하는 기능
         if (transform.position.x <= -retrunPosX)
         {
-            randomPosY = Random.Range(-9f, -5f);
+            randomPosY = Random.Range(-8f, -5f);
             transform.position = new Vector3(retrunPosX, randomPosY, 0);
         }
     }
