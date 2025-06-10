@@ -6,18 +6,21 @@ public class FadeRoutine : MonoBehaviour
 {
     public Image fadePanel;
 
-    public float fadeTime = 3f;
-    private float percent = 0f;
-
-    private float timer = 0f;
-    IEnumerator Start()
+    public void OnFade(float fadeTime, Color color)
     {
+        StartCoroutine(Fade(fadeTime, color));
+    }
+
+    IEnumerator Fade(float fadeTime, Color color)
+    {
+        float timer = 0f;
+        float percent = 0f;
         while (timer < 1f)
         {
             timer += Time.deltaTime;
             percent = timer / fadeTime;
 
-            fadePanel.color = new Color(fadePanel.color.r, fadePanel.color.g, fadePanel.color.b, timer);
+            fadePanel.color = new Color(color.r, color.g, color.b, timer);
             yield return null; 
         }
 
