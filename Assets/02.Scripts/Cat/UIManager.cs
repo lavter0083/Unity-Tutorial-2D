@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace cat.ui
+namespace cat
 {
     public class UIManager : MonoBehaviour
     {
@@ -11,11 +11,13 @@ namespace cat.ui
         public GameObject playObj;
         public GameObject introUI;
         public GameObject playUI;
+        public GameObject videoPanel;
 
         public TMP_InputField inputField;
         public TextMeshProUGUI nameTextUI;
 
         public Button startButton;
+        public Button reStartButton;
 
         private void Awake()
         {
@@ -27,6 +29,8 @@ namespace cat.ui
         private void Start()
         {
             startButton.onClick.AddListener(OnStartButton);
+            reStartButton.onClick.AddListener(OnReStartButton);
+
         }
 
         public void OnStartButton()
@@ -39,18 +43,22 @@ namespace cat.ui
             }
             else
             {
+                nameTextUI.text = inputField.text;
                 soundManager.SetBGMSound("Play");
-
-                playObj.SetActive(true);
-                introUI.SetActive(false);
-                playUI.SetActive(true);
 
                 GameManager.isPlay = true;
 
-                Debug.Log($"{nameTextUI} ют╥б");
-                nameTextUI.text = inputField.text;
-                nameTextUI.text = inputField.text;
+                playObj.SetActive(true);
+                playUI.SetActive(true);
+                introUI.SetActive(false);
             }
+        }
+
+        public void OnReStartButton()
+        {
+            GameManager.ResetPlayUI();
+            playObj.SetActive(true);
+            videoPanel.SetActive(false);
         }
     }
 

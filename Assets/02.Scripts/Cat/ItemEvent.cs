@@ -9,15 +9,27 @@ public class ItemEvent : MonoBehaviour
     public GameObject apple;
     public GameObject particle;
 
-    public float moveSpeed = 2f;
+    public float moveSpeed = 1f;
     public float retrunPosX = 15f;
     public float randomPosY;
 
+    private Vector3 initPos;
+
+    private void Awake()
+    {
+        initPos = transform.localPosition;
+    }
+
     private void Start()
     {
-        SetRandomSetting(transform.position.x);
+        // SetRandomSetting(transform.position.x);
         // randomPosY = Random.Range(-8f, -3f);
         // transform.position = new Vector3(transform.position.x, randomPosY, 0);
+    }
+
+    private void OnEnable()
+    {
+        SetRandomSetting(initPos.x);
     }
 
     void Update()
