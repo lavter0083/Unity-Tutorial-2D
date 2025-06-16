@@ -4,11 +4,11 @@ using UnityEngine;
 public class Study_Casting : MonoBehaviour
 {
     int number1 = 1;
-    float number2 = 10.6f;
+    float number2 = 10.3f;
 
     private void Start()
     {
-        number1 = (int)number2;
+        // number1 = (int)number2; // 소수점 없애기
         float number4 = Mathf.Floor(number2); //내림차순
         float number5 = Mathf.Ceil(number2); // 올림차순
         float number6 = Mathf.Round(number2); // 반올림 x>=5 ? 올림 : 내림 (5 기준으로 올림)
@@ -16,10 +16,10 @@ public class Study_Casting : MonoBehaviour
         Debug.Log(number1);
 
         Debug.Log($"Floor 내림차순 : {number4}");
-        Debug.Log($"Ceil 내림차순 : {number5}");
-        Debug.Log($"Round 내림차순 : {number6}");
+        Debug.Log($"Ceil 올림차순 : {number5}");
+        Debug.Log($"Round 반올림 : {number6}");
 
-        // 숫자형 변환
+        // string 타입 선언 후 숫자형으로 변환
         string str1 = "123";
         string str2 = "456";
         Debug.Log("String : " + str1 + str2);
