@@ -25,8 +25,6 @@ public class Charter : MonoBehaviour
         {
             IDropItem item = other.GetComponent<IDropItem>();
 
-            item.Grab();
-
             currentItem = item;
         }
     }
