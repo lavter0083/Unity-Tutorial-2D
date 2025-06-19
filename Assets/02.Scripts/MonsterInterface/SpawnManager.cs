@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -19,7 +20,8 @@ public class SpawnManager : MonoBehaviour
 
             var createPos = new Vector3(randomX, randomY, 0);
 
-            Instantiate(monsters[randomIndex], createPos, Quaternion.identity);
+            GameObject monster = Instantiate(monsters[randomIndex], createPos, Quaternion.identity);
+
         }
     }
 

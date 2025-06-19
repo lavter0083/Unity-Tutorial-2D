@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6550038236423355680}
   - component: {fileID: 1196247363986293493}
   - component: {fileID: -1003960745760342522}
+  - component: {fileID: 185643972395652979}
   m_Layer: 8
   m_Name: Ruppy
   m_TagString: Untagged
@@ -152,3 +153,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.225}
   m_Radius: 0.225
+--- !u!114 &185643972395652979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6040806445407128955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 716173a09e04b504f8a01606fba9f2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinType: 1
