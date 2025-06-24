@@ -1,20 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KnightControllerJoyStick : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D knightRb;
 
-    private bool isGround;
+    [SerializeField] private Button jumpButton;
+    [SerializeField] private Button atkButton;
 
     private Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 13f;
 
+    private bool isGround;
+    private bool isCombo;
+    private bool isAttack;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         knightRb = GetComponent<Rigidbody2D>();
+
+        jumpButton.onClick.AddListener(Jump); // 점프 버튼 누르면 해당 기능 실행
+        atkButton.onClick.AddListener(Attack);
     }
 
     private void Update() // 바로바로 실행해야하는 일반적인 작업은 update로
@@ -45,6 +54,19 @@ public class KnightControllerJoyStick : MonoBehaviour
         }
     }
 
+    public void InputJoyStick(float x, float y) // 매개변수 활용하여 inputDir에 벡터 좌표를 넣음
+    {
+        inputDir = new Vector3(x, y, 0).normalized;
+        animator.SetFloat("JoyStickX", inputDir.x);
+        animator.SetFloat("JoyStickY", inputDir.y);
+
+        if (inputDir.x != 0)
+        {
+            var scalX = inputDir.x > 0 ? 1 : -1;
+            transform.localScale = new Vector3(scalX, 1, 1);
+        }
+    }
+
     private void Move()
     {
         if (inputDir.x != 0)
@@ -55,26 +77,47 @@ public class KnightControllerJoyStick : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (isGround)
         {
             animator.SetTrigger("Jump");
             knightRb.AddForceY(jumpPower, ForceMode2D.Impulse);
         }
     }
 
-    void SetAnim()
+    void Attack()
     {
-        if (inputDir.x != 0)
+        // isAttack이 true인지 // isAttack은 생성될때 false 상태임
+        // 즉 !들어가면 생성될때의 반대값인지 확인하는것
+        if (!isAttack)
         {
-            var scalX = inputDir.x > 0 ? 1 : -1;
-            transform.localScale = new Vector3(scalX, 1, 1);
-            animator.SetBool("isRun", true);
+            isAttack = true;
+            animator.SetTrigger("Attack");
         }
-        else if (inputDir.x == 0)
+        else
         {
-            animator.SetBool("isRun", false);
+            isCombo = true;
+            Debug.Log("콤보확인");
         }
+    }
 
+    public void CheckCombo()
+    {
+        if (isCombo)
+        {
+            Debug.Log("콤보실행");
+            animator.SetBool("isCombo", true);
+        }
+        else
+        {
+            animator.SetBool("isCombo",false);
+            isAttack = false;
+        }
+    }
+
+    public void EndCombo()
+    {
+        isAttack=false;
+        isCombo=false;
     }
 }
 
