@@ -13,6 +13,8 @@ public class KnightControllerJoyStick : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 13f;
 
+    private float atkDamage = 3f;
+
     private bool isGround;
     private bool isCombo;
     private bool isAttack;
@@ -21,6 +23,7 @@ public class KnightControllerJoyStick : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         knightRb = GetComponent<Rigidbody2D>();
+
 
         jumpButton.onClick.AddListener(Jump); // 점프 버튼 누르면 해당 기능 실행
         atkButton.onClick.AddListener(Attack);
@@ -51,6 +54,14 @@ public class KnightControllerJoyStick : MonoBehaviour
         {
             animator.SetBool("isGround", false);
             isGround = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            Debug.Log($"{atkDamage}만큼 공격");
         }
     }
 
@@ -91,6 +102,7 @@ public class KnightControllerJoyStick : MonoBehaviour
         if (!isAttack)
         {
             isAttack = true;
+            atkDamage = 3f;
             animator.SetTrigger("Attack");
         }
         else
@@ -104,13 +116,14 @@ public class KnightControllerJoyStick : MonoBehaviour
     {
         if (isCombo)
         {
+            atkDamage = 5f;
             Debug.Log("콤보실행");
             animator.SetBool("isCombo", true);
         }
         else
         {
-            animator.SetBool("isCombo",false);
             isAttack = false;
+            animator.SetBool("isCombo",false);
         }
     }
 
@@ -118,6 +131,7 @@ public class KnightControllerJoyStick : MonoBehaviour
     {
         isAttack=false;
         isCombo=false;
+        animator.SetBool("isCombo", false);
     }
 }
 

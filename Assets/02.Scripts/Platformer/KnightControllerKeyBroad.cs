@@ -5,11 +5,16 @@ public class KnightControllerKeyBroad : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D knightRb;
-    private bool isGround;
 
     private Vector3 inputDir;
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float jumpPower = 13f;
+
+    private float atkDamage = 3f;
+
+    private bool isGround;
+    private bool isCombo;
+    private bool isAttack;
 
     void Start()
     {
@@ -20,6 +25,8 @@ public class KnightControllerKeyBroad : MonoBehaviour
     private void Update() // 바로바로 실행해야하는 일반적인 작업은 update로
     {
         InputKeyboard();
+        Jump();
+        Attack();
     }
 
     void FixedUpdate() // 물리적인 작업은 fixedupdate에서 실행해야 좋음
@@ -45,6 +52,14 @@ public class KnightControllerKeyBroad : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            Debug.Log($"{atkDamage}만큼 공격");
+        }
+    }   
+
     void InputKeyboard()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -52,15 +67,18 @@ public class KnightControllerKeyBroad : MonoBehaviour
 
         inputDir = new Vector3(h, v, 0);
 
+        animator.SetFloat("JoyStickX", inputDir.x);
+        animator.SetFloat("JoyStickY", inputDir.y);
 
-        Jump();
-        SetAnim();
     }
 
     private void Move()
     {
         if (inputDir.x != 0)
         {
+            var scaleX = inputDir.x > 0 ? 1 : -1;
+            transform.localScale = new Vector3(scaleX, 1, 1);
+
             knightRb.linearVelocityX = inputDir.x * moveSpeed;
         }
     }
@@ -74,18 +92,47 @@ public class KnightControllerKeyBroad : MonoBehaviour
         }
     }
 
-    void SetAnim()
+
+    void Attack()
     {
-        if (inputDir.x != 0)
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            var scalX = inputDir.x > 0 ? 1 : -1;
-            transform.localScale = new Vector3(scalX, 1, 1);
-            animator.SetBool("isRun", true);
-        }
-        else if (inputDir.x == 0)
-        {
-            animator.SetBool("isRun", false);
+            // isAttack이 true인지 // isAttack은 생성될때 false 상태임
+            // 즉 !들어가면 생성될때의 반대값인지 확인하는것
+            if (!isAttack)
+            {
+                isAttack = true;
+                atkDamage = 3f;
+                animator.SetTrigger("Attack");
+            }
+            else
+            {
+                isCombo = true;
+                Debug.Log("콤보확인");
+            }
         }
 
+    }
+
+    public void CheckCombo()
+    {
+        if (isCombo)
+        {
+            atkDamage = 5f;
+            Debug.Log("콤보실행");
+            animator.SetBool("isCombo", true);
+        }
+        else
+        {
+            isAttack = false;
+            animator.SetBool("isCombo", false);
+        }
+    }
+
+    public void EndCombo()
+    {
+        isAttack = false;
+        isCombo = false;
+        animator.SetBool("isCombo", false);
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - GameOver
   - Apple
   - Pipe
+  - Monster
   layers:
   - Default
   - TransparentFX
