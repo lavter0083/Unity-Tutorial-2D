@@ -15,6 +15,7 @@ public class KnightControllerKeyBroad : MonoBehaviour
     private bool isGround;
     private bool isCombo;
     private bool isAttack;
+    private bool isLadder;
 
     void Start()
     {
@@ -58,7 +59,24 @@ public class KnightControllerKeyBroad : MonoBehaviour
         {
             Debug.Log($"{atkDamage}만큼 공격");
         }
-    }   
+
+        if (other.CompareTag("Ladder"))
+        {
+            isLadder = true;
+            knightRb.gravityScale = 0;
+            knightRb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            knightRb.gravityScale = 3;
+            knightRb.linearVelocity = Vector2.zero;
+        }
+    }
 
     void InputKeyboard()
     {
@@ -70,6 +88,14 @@ public class KnightControllerKeyBroad : MonoBehaviour
         animator.SetFloat("JoyStickX", inputDir.x);
         animator.SetFloat("JoyStickY", inputDir.y);
 
+        if (inputDir.y < 0)
+        {
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.7f, 0.3f);
+        }
+        else
+        {
+            GetComponent<CapsuleCollider2D>().size = new Vector2(0.7f, 1.7f);
+        }
     }
 
     private void Move()
@@ -80,6 +106,11 @@ public class KnightControllerKeyBroad : MonoBehaviour
             transform.localScale = new Vector3(scaleX, 1, 1);
 
             knightRb.linearVelocityX = inputDir.x * moveSpeed;
+        }
+
+        if (isLadder && inputDir.y != 0)
+        {
+            knightRb.linearVelocityY = inputDir.y * moveSpeed;
         }
     }
 
@@ -103,7 +134,7 @@ public class KnightControllerKeyBroad : MonoBehaviour
             {
                 isAttack = true;
                 atkDamage = 3f;
-                animator.SetTrigger("Attack");
+                animator.SetTrigger("isAttack");
             }
             else
             {

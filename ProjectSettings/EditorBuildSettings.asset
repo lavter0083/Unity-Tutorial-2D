@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/01.Scenes/Platform/Map/1. Town.unity
+    guid: d829500f93394a64ca8c10c9a7bcbf6c
+  - enabled: 1
+    path: Assets/01.Scenes/Platform/Map/2. Dungeon.unity
+    guid: 364690a0b1956ef4cb2ce67bd2655583
+  - enabled: 0
     path: Assets/01.Scenes/Cat/Cat.unity
     guid: 274c2431baa9cb24a95501b5771deb60
   m_configObjects:

@@ -79,7 +79,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -144,12 +144,12 @@ TextureImporter:
       name: Jump (28x28)_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 25
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,12 +166,12 @@ TextureImporter:
       name: Jump (28x28)_1
       rect:
         serializedVersion: 2
-        x: 28
+        x: 30
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 23
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: Jump (28x28)_2
       rect:
         serializedVersion: 2
-        x: 56
+        x: 58
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 23
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: Jump (28x28)_3
       rect:
         serializedVersion: 2
-        x: 84
+        x: 86
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 23
+        height: 22
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -232,12 +232,12 @@ TextureImporter:
       name: Jump (28x28)_4
       rect:
         serializedVersion: 2
-        x: 112
+        x: 114
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 23
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -256,10 +256,10 @@ TextureImporter:
         serializedVersion: 2
         x: 140
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 27
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -278,10 +278,10 @@ TextureImporter:
         serializedVersion: 2
         x: 168
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 27
+        height: 8
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -298,12 +298,12 @@ TextureImporter:
       name: Jump (28x28)_7
       rect:
         serializedVersion: 2
-        x: 196
+        x: 198
         y: 0
-        width: 28
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 23
+        height: 10
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

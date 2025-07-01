@@ -23,10 +23,6 @@ public class KnightControllerJoyStick : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         knightRb = GetComponent<Rigidbody2D>();
-
-
-        jumpButton.onClick.AddListener(Jump); // 점프 버튼 누르면 해당 기능 실행
-        atkButton.onClick.AddListener(Attack);
     }
 
     private void Update() // 바로바로 실행해야하는 일반적인 작업은 update로
@@ -57,14 +53,6 @@ public class KnightControllerJoyStick : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Monster"))
-        {
-            Debug.Log($"{atkDamage}만큼 공격");
-        }
-    }
-
     public void InputJoyStick(float x, float y) // 매개변수 활용하여 inputDir에 벡터 좌표를 넣음
     {
         inputDir = new Vector3(x, y, 0).normalized;
@@ -82,56 +70,9 @@ public class KnightControllerJoyStick : MonoBehaviour
     {
         if (inputDir.x != 0)
         {
-            knightRb.linearVelocityX = inputDir.x * moveSpeed;
+            knightRb.linearVelocity = inputDir * moveSpeed;
         }
     }
 
-    void Jump()
-    {
-        if (isGround)
-        {
-            animator.SetTrigger("Jump");
-            knightRb.AddForceY(jumpPower, ForceMode2D.Impulse);
-        }
-    }
-
-    void Attack()
-    {
-        // isAttack이 true인지 // isAttack은 생성될때 false 상태임
-        // 즉 !들어가면 생성될때의 반대값인지 확인하는것
-        if (!isAttack)
-        {
-            isAttack = true;
-            atkDamage = 3f;
-            animator.SetTrigger("Attack");
-        }
-        else
-        {
-            isCombo = true;
-            Debug.Log("콤보확인");
-        }
-    }
-
-    public void CheckCombo()
-    {
-        if (isCombo)
-        {
-            atkDamage = 5f;
-            Debug.Log("콤보실행");
-            animator.SetBool("isCombo", true);
-        }
-        else
-        {
-            isAttack = false;
-            animator.SetBool("isCombo",false);
-        }
-    }
-
-    public void EndCombo()
-    {
-        isAttack=false;
-        isCombo=false;
-        animator.SetBool("isCombo", false);
-    }
 }
 
