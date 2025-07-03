@@ -4,7 +4,6 @@ using System.Collections;
 public class GooBLiN : MonsterCore
 {
     private float timer;
-    private float ranDir;
     private float idleTime, patrolTime;
 
     private float traceDist = 5f;
@@ -17,7 +16,7 @@ public class GooBLiN : MonsterCore
         Init(10f, 3f, 2f);
     }
 
-    protected override void Init(float hp, float speed, float attackTine)
+    protected override void Init(float hp, float speed, float attackTime)
     {
         base.Init(hp, speed, attackTime);
     }
@@ -28,26 +27,26 @@ public class GooBLiN : MonsterCore
         if (timer >= idleTime)
         {
             timer = 0f;
-            ranDir = Random.Range(0, 2) == 1 ? 1 : -1;
-            transform.localScale = new Vector3(ranDir, 1, 1);
+            moveDir = Random.Range(0, 2) == 1 ? 1 : -1;
+            transform.localScale = new Vector3(moveDir, 1, 1);
             patrolTime = Random.Range(1f, 5f);
             animator.SetBool("isRun", true);
 
             ChangeState(MonsterState.PATROL);
+        }
 
-            if (targetDist <= traceDist)
-            {
-                timer = 0f;
-                animator.SetBool("isRun", true);
+        if (targetDist <= traceDist && isTrace)
+        {
+            timer = 0f;
+            animator.SetBool("isRun", true);
 
-                ChangeState(MonsterState.TRACE);
-            }
+            ChangeState(MonsterState.TRACE);
         }
     }
 
     public override void Patrol()
     {
-        transform.position += Vector3.right * ranDir * speed * Time.deltaTime;
+        transform.position += Vector3.right * moveDir * speed * Time.deltaTime;
 
         timer += Time.deltaTime;
         if (timer >= patrolTime)
@@ -57,19 +56,18 @@ public class GooBLiN : MonsterCore
             animator.SetBool("isRun", false);
 
             ChangeState(MonsterState.IDLE);
+        }
 
-            if (targetDist <= traceDist && isTrace)
-            {
-                timer = 0f;
-                ChangeState(MonsterState.TRACE);
-            }
+        if (targetDist <= traceDist && isTrace)
+        {
+            timer = 0f;
+            ChangeState(MonsterState.TRACE);
         }
     }
 
     public override void Trace()
     {
         var targetDir = (target.position - transform.position).normalized;
-
         transform.position += Vector3.right * targetDir.x * speed * Time.deltaTime;
 
         var scaleX = targetDir.x > 0 ? 1 : -1;
@@ -97,7 +95,7 @@ public class GooBLiN : MonsterCore
     IEnumerator AttackRoutine()
     {
         isAttack = true;
-        animator.SetTrigger("isAttack");
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(1f);
         animator.SetBool("isRun", false);
 
@@ -105,5 +103,4 @@ public class GooBLiN : MonsterCore
         isAttack = false;
         ChangeState(MonsterState.IDLE);
     }
-
 }
